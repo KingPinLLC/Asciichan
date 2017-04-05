@@ -23,4 +23,4 @@ class MainPage(Handler):
     def get(self):
         self.write("asciichan!")
 
-app = webapp2.WSGIApplication([('/', MainHandler)], debug=True)
+app = webapp2.WSGIApplication([('/', MainPage)], debug=True)
