@@ -20,7 +20,7 @@ class Handler(webapp2.RequestHandler):
         self.write(self.render_str(template, **kw))
 
         #creates an entitiy which is a database to store users artwork submision from user
-class Art(db.Model)
+class Art(db.Model):
     title = db.StringProperty(required = True)
     art = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
@@ -37,7 +37,9 @@ class MainPage(Handler):
         art = self.request.get("art")
 
         if title and art:
-            self.write("thank ya veri much!")
+            a = Art(title = title, art = art)
+            a.put()
+            self.redirect("/")
         else:
             error = "we need both a title and some artwork, plz!"
             self.render_front(title, art, error)
